@@ -20,13 +20,13 @@
 </template>
 
 <script>
-export default {
-  name: 'Table',
-  props: ["results"],
-  data: () => {
-    return {
+  export default {
+    name: 'Table',
+    props: ["results"],
+    data: () => {
+      return {
 
+      }
     }
   }
-}
 </script>
