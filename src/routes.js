@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import App from './App.vue';
+import mainPage from './components/MainPage.vue';
 import CoinPage from './components/CoinPage.vue';
 import Page404 from './components/Page404.vue';
 
@@ -11,15 +11,15 @@ export default new Router({
     {
       path: '/',
       name: 'App',
-      component: App
+      component: mainPage
     },
     {
       path: '/coins/:id',
       name: 'coins',
-      component: CoinPage
+      component: CoinPage,
     },
     {
-      path: '/error',
+      path: '/*',
       name: 'Error',
       component: Page404
     },
