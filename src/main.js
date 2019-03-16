@@ -3,27 +3,13 @@ import App from './App.vue';
 import VueRouter from '../node_modules/vue-router';
 import CoinPage from './components/CoinPage.vue';
 import Paginate from 'vuejs-paginate';
-import { CubeSpin } from 'vue-loading-spinner';
-import Vuex from 'vuex';
+
+import store from './store';
 
 Vue.config.productionTip = false;
 
 Vue.component('paginate', Paginate);
-Vue.component('cube-spin', CubeSpin);
-Vue.use(Vuex);
-
-const store = new Vuex.Store({
-  state: {
-    dataArr: [],
-  },
-  mutations: {
-    getDataToTable(state, payload) {
-      let { dataArr } = state;
-      const { lastRowInd, firstRowInd } = payload;
-      dataArr = dataArr.slice(firstRowInd, lastRowInd);
-    },
-  }
-});
+// Vue.component('cube-spin', CubeSpin);
 
 const router = new VueRouter({
   routes: [

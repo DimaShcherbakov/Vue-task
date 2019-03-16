@@ -2,7 +2,7 @@
   <div class="text-center">
     <paginate
       v-model="page"
-      :page-count="countResults"
+      :page-count="countPages"
       :click-handler="nextPage(page)"
       :prev-text="'Prev'"
       :next-text="'Next'"
@@ -16,20 +16,26 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
   export default {
-    props: ['countResults'],
     data() {
       return {
         page: 1,
       }
     },
+    computed: {
+      countPages() {
+        console.log('Pagination', this.$store.state.countPages);
+        return this.$store.state.countPages;
+      },
+    },
     methods: {
-      nextPage: (pageNum) => {
-        const indexes = {
+      ...mapActions(['getDataToTableAction']),
+      nextPage(pageNum) {
+        this.$store.dispatch('getDataToTableAction', {
           lastRowInd: pageNum * 20,
           firstRowInd: (pageNum - 1) * 20,
-        }
-        console.log(indexes);
+        });
       }
     }
   }

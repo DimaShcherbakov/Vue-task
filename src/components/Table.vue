@@ -2,15 +2,13 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">ID</th>
         <th scope="col">Name</th>
         <th scope="col">Symbol</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(item, index) in results">
-        <td>{{ index + 1 }}</td>
+      <tr v-for="item in results" :key="item.id">
         <td>{{ item.id }}</td>
         <td>{{ item.name }}</td>
         <td>{{ item.symbol }}</td>
@@ -20,13 +18,13 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   export default {
     name: 'Table',
-    props: ["results"],
-    data: () => {
-      return {
-
-      }
+    computed: {
+      results() {
+        return this.$store.state.pageRows;
+      },
     }
   }
 </script>
