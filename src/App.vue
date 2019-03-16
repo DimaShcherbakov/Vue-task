@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="container">
+    <Page404></Page404>
     <Header v-bind:title="title"/>
     <Table />
     <Pagination />
@@ -10,6 +11,8 @@
   import Header from './components/Header.vue';
   import Table from './components/Table.vue';
   import Pagination from './components/Pagination.vue';
+  import Page404 from './components/Page404.vue';
+
   import { mapState, mapActions } from 'vuex';
   
   export default {
@@ -35,6 +38,7 @@
       Header,
       Table,
       Pagination,
+      Page404,
     }
   }
 </script>

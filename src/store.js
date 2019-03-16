@@ -10,6 +10,7 @@ export default new Vuex.Store({
     dataArr: [],
     countPages: 0,
     pageRows: [],
+    loading: true,
   },
   mutations: {
     getDataToPage(state, payload){
@@ -17,6 +18,7 @@ export default new Vuex.Store({
       console.log(payload)
       state.dataArr = dataArr;
       state.countPages= countPages;
+      state.loading = false;
     },
     getDataToTable(state, payload) {
       let { lastRowInd, firstRowInd } = payload;
@@ -25,7 +27,7 @@ export default new Vuex.Store({
   },
   actions: {
     async getDataAction({ commit }) {
-      const res = await axios.get(LIST_COINS)
+      const res = await axios.get(LIST_COINS);
       const {data} = res;
       let countPages = Math.ceil(data.length / 20);
       commit('getDataToPage', {
