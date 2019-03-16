@@ -18,7 +18,7 @@ const store = new Vuex.Store({
   },
   mutations: {
     getDataToTable(state, payload) {
-      const { dataArr } = state;
+      let { dataArr } = state;
       const { lastRowInd, firstRowInd } = payload;
       dataArr = dataArr.slice(firstRowInd, lastRowInd);
     },
