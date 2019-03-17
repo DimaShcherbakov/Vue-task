@@ -25,7 +25,6 @@ import { mapActions } from 'vuex';
     },
     computed: {
       countPages() {
-        console.log('Pagination', this.$store.state.countPages);
         return this.$store.state.countPages;
       },
     },

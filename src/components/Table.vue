@@ -27,18 +27,13 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex';
   export default {
     name: 'Table',
-    watch: {
-      
-    },
     computed: {
       results() {
         return this.$store.state.pageRows;
       },
       loading() {
-        console.log(this.$store.state.loading)
         return this.$store.state.loading;
       }
     }
@@ -49,6 +44,6 @@
   .spinner-border{
     position: fixed;
     top: 50%;
-    left: 50%;
+    left: 40%;
   }
 </style>
