@@ -34,9 +34,7 @@ export default new Vuex.Store({
       state.filteredArr = state.dataArr.filter((el) => {
         return el.name.match(payload);
       });
-      console.log(state.filteredArr)
       state.countPages = Math.ceil(state.filteredArr.length / 20);
-      console.log(state.countPages)
     },
     clearCoinData(state) {
       state.coinData = {
