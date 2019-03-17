@@ -41,11 +41,6 @@
 
   export default {
     name: 'Table',
-    data() {
-      return {
-        arrayData:[]
-      }
-    },
     computed: {
       results() {
         return this.$store.state.pageRows;

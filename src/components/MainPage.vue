@@ -13,14 +13,6 @@
   import { mapActions } from 'vuex';
 
   export default {
-      computed: {
-        results() {
-          return this.$store.state.dataArr;
-        },
-        countPages() {
-          return this.$store.state.countPages;
-        },
-      },
       data(){
         return {
           title: "Coins statistics",

@@ -10,9 +10,10 @@ export default new Vuex.Store({
   state: {
     countPages: 0,
     loading: true,
-    coinPageLoading:true,
+    coinPageLoading: true,
     chartData: {},
     dataArr: [],
+    filteredArr: [],
     pageRows: [],
     coinData: {},
     weekData: [],
@@ -21,18 +22,21 @@ export default new Vuex.Store({
     getDataToPage(state, payload){
       let { dataArr, countPages } = payload;
       state.dataArr = dataArr;
-      state.countPages= countPages;
+      state.filteredArr = dataArr;
+      state.countPages = countPages;
       state.loading = false;
     },
     getDataToTable(state, payload) {
       let { lastRowInd, firstRowInd } = payload;
-      state.pageRows = [...state.dataArr.slice(firstRowInd, lastRowInd)];
+      state.pageRows = [...state.filteredArr.slice(firstRowInd, lastRowInd)];
     },
     searchCoin(state, payload) {
-      state.dataArr = state.dataArr.filter((el) => {
+      state.filteredArr = state.dataArr.filter((el) => {
         return el.name.match(payload);
-      })
-      state.countPages = Math.ceil(state.dataArr / 20);
+      });
+      console.log(state.filteredArr)
+      state.countPages = Math.ceil(state.filteredArr.length / 20);
+      console.log(state.countPages)
     },
     clearCoinData(state) {
       state.coinData = {
