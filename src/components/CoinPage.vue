@@ -1,5 +1,8 @@
 <template>
   <section class="container col-sm-8">
+    <div class="spinner-border" role="status" v-show="isLoading">
+      <span class="sr-only">Loading...</span>
+    </div>
     <div class="row header">
       <router-link to="/">
         <span>
@@ -24,7 +27,7 @@
       </thead>
       <tbody>
         <tr v-for="item in weekData" :key="item.date">
-          <th scope="row">{{item.date}}</th>
+          <th scope="row">{{ item.date }}</th>
           <td>{{ item.usd }}</td>
           <td>{{ item.eur }}</td>
           <td>{{ item.aed }}</td>
@@ -65,7 +68,7 @@ export default {
         let lastDay = first - index; 
         let day = new Date(curr.setDate(lastDay));
         var dd = day.getDate();
-        var mm = day.getMonth() + 1; //January is 0!
+        var mm = day.getMonth() + 1;
         var yyyy = day.getFullYear();
         if (dd < 10) {
           dd = '0' + dd;
@@ -79,13 +82,18 @@ export default {
     },
     weekData() {
       return this.$store.state.weekData
+    },
+    isLoading() {
+      return this.$store.state.coinPageLoading
     }
   },
-  methods: {...mapActions([
-    'getCoinDataAction',
-    'clearData',
-    'weekData',
-  ])},
+  methods: {
+    ...mapActions([
+      'getCoinDataAction',
+      'clearData',
+      'weekData',
+    ])
+  },
   created() { 
     this.$store.dispatch('getCoinDataAction', this.id);
     this.$store.dispatch('weekData', {

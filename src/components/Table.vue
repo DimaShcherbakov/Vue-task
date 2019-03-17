@@ -3,6 +3,16 @@
     <div class="spinner-border" role="status" v-show="loading">
       <span class="sr-only">Loading...</span>
     </div>
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="input-group">
+        <input type="text" class="form-control" name="x" @input="filter" placeholder="Search term...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <i class="fas fa-search"></i>
+          </button>
+        </span>
+      </div>
+    </div>
     <table class="table">
       <thead>
         <tr>
@@ -27,16 +37,32 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex';
+
   export default {
     name: 'Table',
+    data() {
+      return {
+        arrayData:[]
+      }
+    },
     computed: {
       results() {
         return this.$store.state.pageRows;
       },
+
       loading() {
         return this.$store.state.loading;
       }
-    }
+    },
+    methods: {
+      ...mapActions([
+        'search',
+      ]),
+      filter({ target }) {
+        this.$store.dispatch('search', target.value);
+      }
+    },
   }
 </script>
 

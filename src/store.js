@@ -10,7 +10,7 @@ export default new Vuex.Store({
   state: {
     countPages: 0,
     loading: true,
-    coinPageLoad: true,
+    coinPageLoading:true,
     chartData: {},
     dataArr: [],
     pageRows: [],
@@ -28,11 +28,24 @@ export default new Vuex.Store({
       let { lastRowInd, firstRowInd } = payload;
       state.pageRows = [...state.dataArr.slice(firstRowInd, lastRowInd)];
     },
-    searchCoin() {
-
+    searchCoin(state, payload) {
+      state.dataArr = state.dataArr.filter((el) => {
+        return el.name.match(payload);
+      })
+      state.countPages = Math.ceil(state.dataArr / 20);
     },
     clearCoinData(state) {
-      state.coinData = {};
+      state.coinData = {
+        id:'', 
+        image: '',
+        name: '',
+        cost: {
+          eur: '',
+          usd: '',
+          aed: '',
+        }
+      };
+      console.log(state.coinData)
     },
     getCoinData(state, payload) {
       state.coinData = payload;
@@ -40,6 +53,7 @@ export default new Vuex.Store({
     getCoinWeekData(state, payload) {
       state.weekData = payload.result;
       state.chartData = payload.obj;
+      state.coinPageLoading = false;
     }
   },
   actions: {
@@ -70,6 +84,13 @@ export default new Vuex.Store({
     async weekData({ commit }, payload){
       let arrayUrl = [];
       const { week, id } = payload;
+      let result = [];
+      let obj = {
+        date: [],
+        usd: [],
+        eur: [],
+        aed: [],
+      }
       function getCoinData(url) {
         return axios.get(url);
       }
@@ -86,30 +107,18 @@ export default new Vuex.Store({
         getCoinData(arrayUrl[5]),
         getCoinData(arrayUrl[6]),
       ])
-      let result = [];
-      let obj = {
-        date: [],
-        usd: [],
-        eur: [],
-        aed: [],
-      }
       res.forEach((el, i) => {
         const { data } = el;
         let usd = data.market_data.current_price.usd.toFixed(5);
         let eur = data.market_data.current_price.eur.toFixed(5);
         let aed = data.market_data.current_price.aed.toFixed(5);
         let date = week[i];
-        let stat = {
-          date,
-          usd,
-          eur,
-          aed,
-        }
+        let stat = { date, usd, eur,aed };
         obj.date.push(week[i]),
         obj.usd.push(usd),
         obj.eur.push(eur),
         obj.aed.push(aed),
-        result.push(stat)
+        result.push(stat);
       });
       commit('getCoinWeekData', {
         result,
@@ -122,5 +131,13 @@ export default new Vuex.Store({
     clearData({ commit }) {
       commit('clearCoinData');
     },
+    search({ commit }, payload){
+      console.log(payload)
+      if (payload !== '') {
+        commit('searchCoin', payload)
+      } else {
+        commit('searchCoin', payload)
+      }
+    }
   }
 })

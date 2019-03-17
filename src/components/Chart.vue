@@ -1,6 +1,6 @@
 <template>
   <div class="small">
-    <line-chart :chart-data="datacollection"></line-chart>
+    <line-chart :chart-data="datasetsfull"></line-chart>
   </div>
 </template>
 
@@ -11,27 +11,29 @@
     components: {
       LineChart
     },
-    data () {
-      return {
-        datacollection: null
-      }
-    },
     computed: {
-      days() {
-        return this.$store.state.chartData.date
-      },
-      usd() {
-        return this.$store.state.chartData.usd
-      },
-      eur() {
-        return this.$store.state.chartData.eur
-      },
-      aed() {
-        return this.$store.state.chartData.aed
+      datasetsfull() {
+        return {
+          labels: this.$store.state.chartData.date,
+          datasets: [
+            {
+              label: 'Data USD',
+              backgroundColor: 'black',
+              data: this.$store.state.chartData.usd
+            },
+             {
+              label: 'Data EUR',
+              backgroundColor: 'red',
+              data: this.$store.state.chartData.eur
+            },
+             {
+              label: 'Data AED',
+              backgroundColor: 'green',
+              data: this.$store.state.chartData.aed
+            },
+          ]
+        }
       }
-    },
-    mounted () {
-      this.fillData()
     },
     methods: {
       fillData () {
@@ -56,10 +58,7 @@
           ]
         }
       },
-      getRandomInt () {
-        return Math.floor(Math.random() * (50 - 5 + 1)) + 5
-      }
-    }
+    },
   }
 </script>
 
