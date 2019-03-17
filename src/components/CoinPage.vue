@@ -31,10 +31,12 @@
         </tr>
       </tbody>
     </table>
+    <Chart></Chart>
   </section>
 </template>
 
 <script>
+import Chart from './Chart.vue';
 import { mapActions } from 'vuex';
 
 export default {
@@ -94,6 +96,9 @@ export default {
   destroyed() {
     this.$store.dispatch('clearData');
   },
+  components: {
+    Chart,
+  }
 }
 </script>
 

@@ -11,6 +11,7 @@ export default new Vuex.Store({
     countPages: 0,
     loading: true,
     coinPageLoad: true,
+    chartData: {},
     dataArr: [],
     pageRows: [],
     coinData: {},
@@ -37,7 +38,8 @@ export default new Vuex.Store({
       state.coinData = payload;
     },
     getCoinWeekData(state, payload) {
-      state.weekData = payload;
+      state.weekData = payload.result;
+      state.chartData = payload.obj;
     }
   },
   actions: {
@@ -65,12 +67,6 @@ export default new Vuex.Store({
         }
       });
     },
-    getDataToTableAction({ commit }, payload) {
-      commit('getDataToTable', payload);
-    },
-    clearData({ commit }) {
-      commit('clearCoinData');
-    },
     async weekData({ commit }, payload){
       let arrayUrl = [];
       const { week, id } = payload;
@@ -91,18 +87,40 @@ export default new Vuex.Store({
         getCoinData(arrayUrl[6]),
       ])
       let result = [];
+      let obj = {
+        date: [],
+        usd: [],
+        eur: [],
+        aed: [],
+      }
       res.forEach((el, i) => {
         const { data } = el;
+        let usd = data.market_data.current_price.usd.toFixed(5);
+        let eur = data.market_data.current_price.eur.toFixed(5);
+        let aed = data.market_data.current_price.aed.toFixed(5);
+        let date = week[i];
         let stat = {
-          id,
-          date: week[i],
-          usd: data.market_data.current_price.usd.toFixed(5),
-          eur: data.market_data.current_price.eur.toFixed(5),
-          aed: data.market_data.current_price.aed.toFixed(5),
+          date,
+          usd,
+          eur,
+          aed,
         }
+        obj.date.push(week[i]),
+        obj.usd.push(usd),
+        obj.eur.push(eur),
+        obj.aed.push(aed),
         result.push(stat)
-      })
-      commit('getCoinWeekData', result);
-    }
+      });
+      commit('getCoinWeekData', {
+        result,
+        obj
+      });
+    },
+    getDataToTableAction({ commit }, payload) {
+      commit('getDataToTable', payload);
+    },
+    clearData({ commit }) {
+      commit('clearCoinData');
+    },
   }
 })
