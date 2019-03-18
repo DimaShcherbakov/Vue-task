@@ -28,7 +28,7 @@ export default {
       }
     });
   },
-  async weekData({ commit }, payload){
+  async getWeekData({ commit }, payload){
     let arrayUrl = [];
     const { week, id } = payload;
     let result = [];
@@ -56,7 +56,6 @@ export default {
     ])
     res.forEach((el, i) => {
       const { data } = el;
-      console.log(data)
       if (data.market_data) {
         let usd = data.market_data.current_price.usd.toFixed(5);
         let eur = data.market_data.current_price.eur.toFixed(5);
@@ -68,6 +67,8 @@ export default {
         obj.eur.push(eur),
         obj.aed.push(aed),
         result.push(stat);
+      } else {
+        commit('dataNotFound');
       }
     });
     commit('getCoinWeekData', {
@@ -81,8 +82,7 @@ export default {
   clearData({ commit }) {
     commit('clearCoinData');
   },
-  search({ commit }, payload){
-    console.log(payload)
+  search({ commit }, payload) {
     if (payload !== '') {
       commit('searchCoin', payload)
     } else {

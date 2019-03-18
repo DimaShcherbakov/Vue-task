@@ -10,7 +10,9 @@
       :page-class="'page-item'"
       :page-link-class="'page-link'"
       :prev-link-class="'page-link'"
-      :next-link-class="'page-link'">
+      :next-link-class="'page-link'"
+      :hide-prev-next="true"
+    >
     </paginate>
   </div>
 </template>
@@ -21,6 +23,7 @@ import { mapActions } from 'vuex';
     data() {
       return {
         page: 1,
+        disable: false
       }
     },
     computed: {

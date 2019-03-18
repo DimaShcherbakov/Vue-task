@@ -3,18 +3,13 @@
     <div class="spinner-border" role="status" v-show="loading">
       <span class="sr-only">Loading...</span>
     </div>
-    <div class="col-xs-8 col-xs-offset-2">
+    <div class="col-xs-5 col-xs-offset-2">
       <div class="input-group">
         <input type="text" class="form-control" name="x" @input="filter" placeholder="Search term...">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
-            <i class="fas fa-search"></i>
-          </button>
-        </span>
       </div>
     </div>
     <table class="table">
-      <thead>
+      <thead class="thead-dark">
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Name</th>
@@ -24,10 +19,10 @@
       </thead>
       <tbody>
         <tr v-for="item in results" :key=" item.id ">
-          <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.symbol }}</td>
-          <td>
+          <td style="width:  30%">{{ item.id }}</td>
+          <td style="width:  30%">{{ item.name }}</td>
+          <td style="width:  30%">{{ item.symbol }}</td>
+          <td style="width:  10%; text-align: center; ">
             <router-link :to="{ name: 'coins', params: { id: item.id }}"> <i class="fas fa-angle-double-right"></i></router-link>
           </td>
         </tr>

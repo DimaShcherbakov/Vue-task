@@ -37,30 +37,6 @@
         }
       }
     },
-    methods: {
-      fillData () {
-        this.datacollection = {
-          labels: this.days,
-          datasets: [
-            {
-              label: 'Data USD',
-              backgroundColor: 'black',
-              data: this.usd
-            },
-             {
-              label: 'Data EUR',
-              backgroundColor: 'red',
-              data: this.eur
-            },
-             {
-              label: 'Data AED',
-              backgroundColor: 'green',
-              data: this.aed
-            },
-          ]
-        }
-      },
-    },
   }
 </script>
 

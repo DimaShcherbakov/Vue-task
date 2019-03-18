@@ -1,5 +1,5 @@
 <template>
-  <div class="page-wrap d-flex flex-row align-items-center">
+  <div class="page-wrap d-flex flex-row align-items-center error">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-12 text-center">
@@ -11,3 +11,14 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+  .error{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 30%;
+    width: 50%;
+    margin: -15% 0 0 -25%;
+  }
+</style>

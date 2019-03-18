@@ -15,7 +15,7 @@
   export default {
       data(){
         return {
-          title: "Coins statistics",
+          title: "VironItCoinStat",
         }
       },
       methods: {...mapActions(['getDataAction'])},
