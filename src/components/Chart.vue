@@ -31,7 +31,9 @@
               backgroundColor: 'green',
               data: this.$store.state.chartData.aed
             },
-          ]
+          ],
+          hoverBorderColor: 'green',
+          hoverBorderWidth: 3,
         }
       }
     },

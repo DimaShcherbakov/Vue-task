@@ -62,15 +62,14 @@ export default {
         normalDate(5),
         normalDate(6)
       ];
-      // console.log(array)
       function normalDate(index){
         let curr = new Date;
-        var first = curr.getDate();
+        let first = curr.getDate();
         let lastDay = first - index; 
         let day = new Date(curr.setDate(lastDay));
-        var dd = day.getDate();
-        var mm = day.getMonth() + 1;
-        var yyyy = day.getFullYear();
+        let dd = day.getDate();
+        let mm = day.getMonth() + 1;
+        let yyyy = day.getFullYear();
         if (dd < 10) {
           dd = '0' + dd;
         }
@@ -86,6 +85,9 @@ export default {
     },
     isLoading() {
       return this.$store.state.coinPageLoading
+    },
+    error() {
+      return this.$store.state
     }
   },
   methods: {
