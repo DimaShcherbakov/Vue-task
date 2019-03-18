@@ -111,6 +111,7 @@ export default new Vuex.Store({
       ])
       res.forEach((el, i) => {
         const { data } = el;
+        console.log(data)
         let usd = data.market_data.current_price.usd.toFixed(5);
         let eur = data.market_data.current_price.eur.toFixed(5);
         let aed = data.market_data.current_price.aed.toFixed(5);

@@ -62,9 +62,10 @@ export default {
         normalDate(5),
         normalDate(6)
       ];
+      // console.log(array)
       function normalDate(index){
         let curr = new Date;
-        var first = curr.getDate() - curr.getDay();
+        var first = curr.getDate();
         let lastDay = first - index; 
         let day = new Date(curr.setDate(lastDay));
         var dd = day.getDate();
