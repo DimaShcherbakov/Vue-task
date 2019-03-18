@@ -48,6 +48,7 @@
     methods: {
       ...mapActions([
         'search',
+        'getDataToTableAction'
       ]),
       filter({ target }) {
         this.$store.dispatch('search', target.value);

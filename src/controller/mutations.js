@@ -15,16 +15,7 @@ export default {
     state.countPages = Math.ceil(state.filteredArr.length / 20);
   },
   clearCoinData(state) {
-    state.coinData = {
-      // id:'', 
-      // image: '',
-      // name: '',
-      // cost: {
-      //   eur: '',
-      //   usd: '',
-      //   aed: '',
-      // }
-    };
+    state.coinData = {};
     state.weekData = [];
   },
   dataNotFound(state) {
@@ -33,6 +24,7 @@ export default {
   getCoinData(state, payload) {
     state.coinData = payload;
     state.error = false;
+    state.coinPageLoading = false;
   },
   getCoinWeekData(state, payload) {
     state.weekData = payload.result;

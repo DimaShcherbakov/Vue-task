@@ -16,7 +16,10 @@
         <h2>{{ data.name }}</h2>
       </div>
     </div>
-    <div v-if="error">ERROR</div>
+    <div v-if="error">
+      <h2>Sorry!! Data not found for last week!!</h2>
+      <p>Our team are recomend you to look on the other coins!!</p>
+    </div>
     <div v-else>
       <table class="table">
         <thead class="thead-dark">
